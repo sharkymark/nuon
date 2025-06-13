@@ -51,7 +51,7 @@ curl -fsSL https://nuon-artifacts.s3.us-west-2.amazonaws.com/cli/install.sh | ba
 
 ### Dashboard
 
-If using Nuon's hosted control plane, you can access the dashboard at [https://app.nuon.co](https://https://app.nuon.co/o). If you are running your own control plane, you can access the dashboard at `http://<your-control-plane-ip>`.
+If using Nuon's hosted control plane, you can access the dashboard at [https://app.nuon.co](https://https://app.nuon.co/o). If you are running your own control plane, you can access the dashboard at `https://<your-control-plane-ip>` specified during the config.
 
 ## Changelog
 For the latest changes, see [Updates](https://docs.nuon.co/updates/)
