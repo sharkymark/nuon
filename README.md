@@ -1,6 +1,6 @@
-# Nuon tips and tricks
+# Nuon FAQ, Examples, and Tips
 
-As I use Nuon more and more, I find myself needing to remember some of the tips and tricks I learn along the way. This document serves as a collection of those tips.
+As I use Nuon more and more, I find myself documenting things that I learn along the way. This document serves as a collection of these FAQ, examples, and tips.
 
 ## What is Nuon?
 Enterprise customers assume risk of data loss when using a software vendor's cloud offering. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. What if there was a way for customers to run vendor software on their own infrastructure, but managed by the vendor? What if the vendor could offer this solution for a lot less resources than building a cloud offering?
