@@ -6,19 +6,19 @@
 <summary>CLI</summary>
 <details>
 <summary>How do I create a new app and sync it?</summary>
-Use the `nuon apps create -n <your app name> --no-template` command to create a new app, and then use `nuon apps sync .` to sync the local directory of app config files with the app.
+Use the <code>nuon apps create -n <your app name> --no-template</code> command to create a new app, and then use <code>nuon apps sync .</code> to sync the local directory of app config files with the app.
 </details>
 
 <details>
-<summary>There are two sync sub-commands under nuon apps, what is the difference?</summary>
-`nuon apps sync` is a more advanced sync that does some validation and knows how to construct a config from a well-known directory structure. `nuon apps sync-dir` used to do this, but will be deprecated.
+<summary>There are two sync sub-commands under <code>nuon apps</code>, what is the difference?</summary>
+<code>nuon apps sync</code> is a more advanced sync that does some validation and knows how to construct a config from a well-known directory structure. <code>nuon apps sync-dir</code> used to do this, but will be deprecated.
 
 > Note: The directory that you run `nuon apps sync` in, must be the same name as the app created in `nuon apps create -n <your app name> --no-template`.
 </details>
 
 <details>
 <summary>Where are org, app and install current contexts stored?</summary>
-The current contexts are stored in the local `~/.nuon` file along with the Nuon api key.
+The current contexts are stored in the local <code>~/.nuon</code> file along with the Nuon api key.
 </details>
 
 </details>
