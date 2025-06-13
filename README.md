@@ -10,7 +10,9 @@ That is called Bring-your-own-cloud (BYOC) and Nuon is a platform that automates
 ## Who should use Nuon?
 Software vendors who want to provide single-tenant or customer-cloud offerings to their customers, but do not want to build and maintain a cloud offering. 
 
-Nuon is also for customers who want to run vendor software on their own infrastructure, but do not want to manage the deployment and operations of the software themselves. e.g., a Global 2000 company toiling to manage their globally distributed instances of self-hosted vendor software products.  Customers can also use Nuon to manage internally-developed software deployed in a myriad of ways throughout their organization.
+Nuon is also for customers who want to run vendor software on their own infrastructure, but do not want to manage the deployment and operations of the software themselves. e.g., a Global 2000 company toiling to manage their globally distributed instances of self-hosted vendor software products.
+
+Customers can also use Nuon to manage internally-developed software deployed in a myriad of ways throughout their organization.
 
 ## Architecture
 
