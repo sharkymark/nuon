@@ -1,0 +1,43 @@
+# Frequently Asked Questions
+
+(sorted by category)
+
+<details>
+<summary>CLI</summary>
+
+<details>
+<summary>How do I create a new app and sync it?</summary>
+
+Use the `nuon apps create -n <your app name> --no-template` command to create a new app, and then use `nuon apps sync .` to sync the local directory of app config files with the app.
+
+</details>
+
+<details>
+<summary>There are two sync commands under `nuon apps`, what is the difference?</summary>
+
+`nuon apps sync` is a more advanced sync that does some validation and knows how to construct a config from a well-known directory structure. `nuon apps sync-dir` used to do this, but will be deprecated.
+
+> Note: The directory that you run `nuon apps sync` in, must be the same name as the app created in `nuon apps create -n <your app name> --no-template`.
+
+</details>
+
+<details>
+<summary>Where are org, app and install current contexts stored?</summary>
+
+The current contexts are stored in the local `~/.nuon` file along with the Nuon api key.
+
+</details>
+
+</details>
+
+<details>
+<summary>AWS</summary>
+
+<details>
+<summary>As a customer deploying an app from the Nuon dashboard, how do I tie my AWS access key and secret access key to the app install?</summary>
+
+When you click on the Nuon-generated CloudFormation Stack Link in the Nuon dashboard, that opens in the customer's AWS account. The initial install runner and app install is done with the customer's AWS credentials. Nuon never will have access to these credentials.  All of those Nuon control plane activities like creating app configs and building components, leverage the AWS (or equivalent cloud) credentials of Nuon-hosted control plane or the customer-hosted control plane.
+
+</details>
+
+</details>

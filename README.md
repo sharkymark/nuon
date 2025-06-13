@@ -61,6 +61,10 @@ For the latest changes, see [Updates](https://docs.nuon.co/updates/)
 ### eks-simple
 This example repository [eks-simple](https://github.com/nuonco/demo/tree/main/eks-simple) creates an EKS cluster with a `whoami` application deployed on it. I've confirmed it works and it is well maintained including the new directory structure for the app config.
 
+## Frequently Asked Questions
+
+The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, including CLI commands, AWS integration, and more.
+
 ## Resources
 
 - [Nuon documentation](https://docs.nuon.co/)
@@ -76,3 +80,6 @@ This example repository [eks-simple](https://github.com/nuonco/demo/tree/main/ek
 - [Latest EKS sandbox repo](https://github.com/nuonco/aws-eks-sandbox)
 - [Latest EKS Karpenter sanbox repo](https://github.com/nuonco/aws-eks-karpenter-sandbox)
 - [eks-simple repo](https://github.com/nuonco/demo/tree/main/eks-simple)
+
+## Deprecated Resources
+- [Guides repos](https://github.com/nuonco/guides)
