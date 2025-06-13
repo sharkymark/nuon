@@ -44,6 +44,11 @@ For PoCs, Nuon hosts the control plane on a public cloud. For production deploym
 nuon --help
 ```
 
+Or the installation script:
+```bash
+curl -fsSL https://nuon-artifacts.s3.us-west-2.amazonaws.com/cli/install.sh | bash
+```
+
 ### Dashboard
 
 If using Nuon's hosted control plane, you can access the dashboard at [https://app.nuon.co](https://https://app.nuon.co/o). If you are running your own control plane, you can access the dashboard at `http://<your-control-plane-ip>`.
@@ -62,4 +67,7 @@ This example repository [eks-simple](https://github.com/nuonco/demo/tree/main/ek
 - [Nuon GitHub repository](https://github.com/nuonco)
 - [BYOC Nuon app config](https://github.com/nuonco/byoc/tree/main)
 - [EKS teardown script](https://github.com/nuonco/sandboxes/blob/main/aws-eks/error-destroy.sh)
+- [Nuon Terraform Provider](https://registry.terraform.io/providers/nuonco/nuon/latest/docs)
+- [Nuon Terraform modules](https://registry.terraform.io/modules/nuonco/)
+- [Nuon Slack channel](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA)
 - [eks-simple repo](https://github.com/nuonco/demo/tree/main/eks-simple)
