@@ -1,0 +1,16 @@
+[inputs]
+[[inputs.input]]
+# https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
+name = "cluster_version"
+description = "Kubernetes cluster version"
+default = "v.1.30"
+
+[sandbox]
+# https://github.com/nuonco/sandboxes
+terraform_version = "v1.6.3"
+[sandbox.public_repo]
+repo = "nuonco/sandboxes"
+directory = "aws-eks"
+branch = "main"
+[sandbox.vars]
+cluster_version = "{{.nuon.install.inputs.cluster_version}}"
