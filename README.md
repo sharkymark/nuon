@@ -70,4 +70,6 @@ This example repository [eks-simple](https://github.com/nuonco/demo/tree/main/ek
 - [Nuon Terraform Provider](https://registry.terraform.io/providers/nuonco/nuon/latest/docs)
 - [Nuon Terraform modules](https://registry.terraform.io/modules/nuonco/)
 - [Nuon Slack channel](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA)
+- [Nuon components](https://github.com/nuonco/components)
+- [Nuon sandboxes](https://github.com/nuonco/sandboxes)
 - [eks-simple repo](https://github.com/nuonco/demo/tree/main/eks-simple)
