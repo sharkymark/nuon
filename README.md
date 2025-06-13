@@ -75,7 +75,6 @@ The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, includ
 - [Nuon Terraform modules](https://registry.terraform.io/modules/nuonco/)
 - [Nuon Slack channel](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA)
 - [Nuon components](https://github.com/nuonco/components)
-- [Nuon sandboxes](https://github.com/nuonco/sandboxes)
 - [Nuon Runner public components and scripts](https://github.com/nuonco/runner)
 - [Latest EKS sandbox repo](https://github.com/nuonco/aws-eks-sandbox)
 - [Latest EKS Karpenter sanbox repo](https://github.com/nuonco/aws-eks-karpenter-sandbox)
@@ -83,3 +82,4 @@ The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, includ
 
 ## Deprecated Resources
 - [Guides repos](https://github.com/nuonco/guides)
+- [Nuon sandboxes](https://github.com/nuonco/sandboxes)
