@@ -16,13 +16,13 @@ Customers can also use Nuon to manage internally-developed software deployed in 
 
 ## Architecture
 
-The control plane consists of an api server, a build runner, web dashboard application, and a database. The nuon CLI interacts with the control plane including uploading 1:many application configurations which are a set of toml, IaC, and script files that define how to deploy the vendor software on customer infrastructure. The control plane can be hosted by Nuon or deployed on the customer's infrastructure aka BYOC Nuon.
+The control plane consists of an api server, a build runner, web dashboard application, and Postgres and ClickHouse databases. The nuon CLI interacts with the control plane including uploading 1:many application configurations which are a set of toml, IaC, and script files that define how to deploy the vendor software on customer infrastructure. The control plane can be hosted by Nuon or deployed on the customer's infrastructure aka BYOC Nuon.
 
 The build runner generates an artifact for each version of the vendor's app e.g., a CloudFormation stack or comparable other cloud IaC standard, which is opened in the customer's cloud account or through a self-service portal. This creates a VM with the Nuon install runner that phones home to the Nuon control plane to register itself. The install runner, a systemd service along with a Docker systemd service on the VM, then runs the scripts and applies the infrastructure as code (IaC) to deploy the vendor software on the customer's infrastructure. This is called day 1 operations. The control plane never outbound communicates with the install runners in the customer infrastructure, it only receives inbound requests from the install runners.
 
 Day 2 operations are the 1:many Nuon actions that the vendor defines and which are executed by the install runner to monitor, manage, and upgrade the vendor software on the customer's infrastructure.
 
-All of these events are managed by an underlying Temporal durable execution engine which allows for long-running workflows and retries in case of failures, and the event logging in OTel format are sent to a  Clickhouse database in the Nuon control plane for analytics and monitoring.
+All of these actions are managed by an underlying Temporal durable execution engine which allows for long-running workflows and retries in case of failures, and the event logging in OTel format are sent to a  ClickHouse database in the Nuon control plane for analytics and monitoring.
 
 
 ## Installation
