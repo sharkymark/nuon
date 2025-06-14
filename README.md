@@ -3,7 +3,7 @@
 As I use Nuon more and more, I find myself documenting things that I learn along the way. This document serves as a collection of these FAQ, examples, and tips.
 
 ## What is Nuon?
-Nuon lets customers do SaaS in their cloud. But the challenge is making it secure, since the vendor has to touch the customer's cloud. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. 
+Nuon lets customers do vendor products' SaaS in their cloud. But the challenge is making it secure, since the vendor has to touch the customer's cloud. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. 
 
 What if there was a way for customers to run vendor software on their own infrastructure, but managed by the vendor? What if the vendor could offer this solution for a lot less resources than building a cloud offering?
 
