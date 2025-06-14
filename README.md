@@ -9,7 +9,7 @@ What if there was a way for customers to run vendor software on their own infras
 
 That is called Bring-your-own-cloud (BYOC) and Nuon is a BYOC platform that automates the deployment and management of vendor software on customer infrastructure. It is a platform that allows vendors to offer their software as a service, while customers retain control over their data and infrastructure. 
 
-Examples Nuon use cases include making sure customers' secrets, logs with credit card information are not going to the vendor and AWS S3 buckets are not publicly accessible.
+Examples Nuon use cases include making sure customers' secrets and logs with credit card information are not going to the vendor and AWS S3 buckets are not publicly accessible.
 
 
 
