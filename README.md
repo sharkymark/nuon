@@ -33,6 +33,11 @@ All of these events are managed by an underlying Temporal durable execution engi
 brew install nuonco/tap/nuon
 ```
 
+Or the installation script:
+```bash
+curl -fsSL https://nuon-artifacts.s3.us-west-2.amazonaws.com/cli/install.sh | bash
+```
+
 ### Control Plane
 
 For PoCs, Nuon hosts the control plane on a public cloud. For production deployments, you can deploy the control plane on your own infrastructure using the [BYOC Nuon application configuration repository](https://github.com/nuonco/byoc/tree/main). In other words, Nuon is used to deploy Nuon's control plane in a customer's cloud. 
@@ -42,11 +47,6 @@ For PoCs, Nuon hosts the control plane on a public cloud. For production deploym
 ### CLI
 ```bash
 nuon --help
-```
-
-Or the installation script:
-```bash
-curl -fsSL https://nuon-artifacts.s3.us-west-2.amazonaws.com/cli/install.sh | bash
 ```
 
 ### Dashboard
