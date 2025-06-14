@@ -3,9 +3,15 @@
 As I use Nuon more and more, I find myself documenting things that I learn along the way. This document serves as a collection of these FAQ, examples, and tips.
 
 ## What is Nuon?
-Enterprise customers assume risk of data loss when using a software vendor's cloud offering. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. What if there was a way for customers to run vendor software on their own infrastructure, but managed by the vendor? What if the vendor could offer this solution for a lot less resources than building a cloud offering?
+Nuon lets customers do SaaS in their cloud. But the challenge is making it secure, since the vendor has to touch the customer's cloud. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. 
 
-That is called Bring-your-own-cloud (BYOC) and Nuon is a platform that automates the deployment and management of vendor software on customer infrastructure. It is a platform that allows vendors to offer their software as a service, while customers retain control over their data and infrastructure.
+What if there was a way for customers to run vendor software on their own infrastructure, but managed by the vendor? What if the vendor could offer this solution for a lot less resources than building a cloud offering?
+
+That is called Bring-your-own-cloud (BYOC) and Nuon is a BYOC platform that automates the deployment and management of vendor software on customer infrastructure. It is a platform that allows vendors to offer their software as a service, while customers retain control over their data and infrastructure. 
+
+Examples Nuon use cases include making sure customers' secrets, logs with credit card information are not going to the vendor and AWS S3 buckets are not publicly accessible.
+
+
 
 ## Who should use Nuon?
 Software vendors who want to provide single-tenant or customer-cloud offerings to their customers, but do not want to build and maintain a cloud offering. 
