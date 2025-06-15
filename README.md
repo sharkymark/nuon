@@ -18,7 +18,7 @@ Software vendors who want to provide single-tenant or customer-cloud offerings t
 
 Nuon is also for customers who want to run vendor software securely on their own infrastructure, but do not want to manage the deployment and operations of the software themselves. e.g., a Global 2000 company toiling to manage their globally distributed instances of self-hosted vendor software products.
 
-Customers can also use Nuon to more securely andd efficiently manage internally-developed software deployed in a myriad of ways throughout their organization.
+Customers can also use Nuon to more securely and efficiently manage internally-developed software deployed in a myriad of ways throughout their organization.
 
 ## Architecture
 
