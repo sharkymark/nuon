@@ -10,7 +10,7 @@ Use the <code>nuon apps create -n <your app name> --no-template</code> command t
 </details>
 
 <details>
-<summary>There are two sync sub-commands under <code>nuon apps</code>, what is the difference?</summary>
+<summary>There are two <code>sync</code> sub-commands under <code>nuon apps</code>, what is the difference?</summary>
 <code>nuon apps sync</code> is a more advanced sync that does some validation and knows how to construct a config from a well-known directory structure. <code>nuon apps sync-dir</code> used to do this, but will be deprecated.
 
 > Note: The directory that you run `nuon apps sync` in, must be the same name as the app created in `nuon apps create -n <your app name> --no-template`.
