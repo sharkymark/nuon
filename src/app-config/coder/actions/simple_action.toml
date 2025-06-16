@@ -1,0 +1,47 @@
+#:schema https://api.nuon.co/v1/general/config-schema?source=action
+
+name    = "check_coder_deployment"
+timeout = "2m"
+
+[[triggers]]
+type           = "post-deploy-component"
+component_name = "coder"
+
+[[steps]]
+name    = "Check Coder pod status"
+inline_contents = """
+#!/usr/bin/env sh
+kubectl get pods -n coder -l app.kubernetes.io/name=coder -o json | jq '.items[].status.phase' | grep -q Running || exit 1
+"""
+
+[[steps]]
+name    = "Check Coder service external endpoint"
+inline_contents = """
+#!/usr/bin/env sh
+kubectl get svc -n coder -l app.kubernetes.io/name=coder -o json | jq -e '.items[].status.loadBalancer.ingress[0].hostname' || exit 1
+"""
+
+[[steps]]
+name    = "Check ALB health (if available)"
+inline_contents = """
+#!/usr/bin/env sh
+ALB_HOST=$(kubectl get svc -n coder -l app.kubernetes.io/name=coder -o json | jq -r '.items[].status.loadBalancer.ingress[0].hostname')
+if [ -n "$ALB_HOST" ]; then
+  curl -sSf --max-time 10 https://$ALB_HOST || exit 1
+fi
+"""
+
+[[steps]]
+name    = "Check Postgres pod status"
+inline_contents = """
+#!/usr/bin/env sh
+kubectl get pods -n coder -l app.kubernetes.io/name=postgresql -o json | jq '.items[].status.phase' | grep -q Running || exit 1
+"""
+
+[[steps]]
+name    = "Check Coder deployment replicas"
+inline_contents = """
+#!/usr/bin/env sh
+kubectl get deployment -n coder -l app.kubernetes.io/name=coder -o json | jq '.items[].status.readyReplicas' | grep -q 1 || exit 1
+"""
+
