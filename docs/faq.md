@@ -21,6 +21,11 @@ Use the <code>nuon apps create -n <your app name> --no-template</code> command t
 The current contexts are stored in the local <code>~/.nuon</code> file along with the Nuon api key.
 </details>
 
+<details>
+<summary>How do I see detailed error messages?</summary>
+Set the environment variable <code>export NUON_DEBUG=true</code> then use the CLI commands as usual. This will enable debug logging and show more detailed error messages.
+</details>
+
 </details>
 
 <details>
