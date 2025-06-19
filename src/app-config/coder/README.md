@@ -61,7 +61,7 @@ If nuon_dns is enabled. {{ if .nuon.sandbox.outputs }}
 
 | Service | URL                                                                                                                                   |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| whoami  | [whoami.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}](https://app.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}) |
+| coder  | [coder.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}](https://app.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}) |
 
 {{ else }} Results will be visible after the sandbox is deployed. {{ end }}
 
