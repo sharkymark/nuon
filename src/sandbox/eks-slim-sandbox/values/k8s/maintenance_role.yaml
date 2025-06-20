@@ -214,8 +214,6 @@ rules:
   - get
   - list
   - watch
-- apiGroups:
-  - kyverno.io
   resources:
   - cleanuppolicies
   - clustercleanuppolicies
@@ -233,9 +231,7 @@ rules:
   verbs:
   - get
   - list
-  - watch
-- apiGroups:
-  - reports.kyverno.io
+  - watcho
   resources:
   - ephemeralreports
   - clusterephemeralreports
@@ -243,8 +239,6 @@ rules:
   - get
   - list
   - watch
-- apiGroups:
-  - kyverno.io
   resources:
   - updaterequests
   verbs:
@@ -379,8 +373,6 @@ rules:
   - get
   - list
   - watch
-- apiGroups:
-  - kyverno.io
   resources:
   - cleanuppolicies
   - clustercleanuppolicies
@@ -407,8 +399,6 @@ rules:
   - patch
   - update
   - watch
-- apiGroups:
-  - reports.kyverno.io
   resources:
   - ephemeralreports
   - clusterephemeralreports
@@ -420,8 +410,6 @@ rules:
   - patch
   - update
   - watch
-- apiGroups:
-  - kyverno.io
   resources:
   - updaterequests
   verbs:

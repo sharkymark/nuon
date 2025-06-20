@@ -15,8 +15,6 @@ module "nuon-aws-eks-sandbox" {
 
   maintenance_cluster_role_rules_override = var.maintenance_cluster_role_rules_override
 
-  kyverno_policy_dir = var.kyverno_policy_dir
-
   # cluster
   cluster_version       = var.cluster_version
   cluster_name          = var.cluster_name
