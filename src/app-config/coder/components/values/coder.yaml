@@ -1,12 +1,43 @@
 replicaCount: 1
 
+# since tls is terminated at alb
 tls:
-  secretNames:
-    - "{{ .nuon.components.certificate.outputs.public_domain_certificate_secret_name }}"
+  secretNames: []
 
 serviceAccount:
   workspacePerms: true
   enableDeployments: true
+
+# letting nuon handle alb and routing to coder service and port
+ingress:
+  enabled: false
+  # if you want to use the ingress, uncomment the following lines
+  # and set the annotations as needed
+  # annotations:
+  #   kubernetes.io/ingress.class: "alb"
+  #   alb.ingress.kubernetes.io/scheme: internet-facing
+  #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+  #   alb.ingress.kubernetes.io/certificate-arn: "{{ .nuon.components.certificate.outputs.public_domain_certificate_arn }}"
+  #   alb.ingress.kubernetes.io/target-type: ip
+
+service:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+      
+  sessionAffinity: None # Already default, but good to confirm.
+  loadBalancerIP: ""
+  loadBalancerClass: ""
+  annotations: {} # No annotations needed here for ALB provisioning
+  httpNodePort: "" # Irrelevant with ClusterIP
+  httpsNodePort: "" # Irrelevant with ClusterIP    
+
+externalTrafficPolicy: Local
+
+envUseClusterAccessURL: false
 
 coder:
   env:
