@@ -1,6 +1,6 @@
-name              = "certificate"
+name              = "wildcard_certificate"
 type              = "terraform_module"
-terraform_version = "1.11.3"
+terraform_version = "1.10.4"
 
 [public_repo]
 repo      = "nuonco/components"
@@ -9,4 +9,4 @@ branch    = "main"
 
 [vars]
 zone_id     = "{{ .nuon.install.sandbox.outputs.nuon_dns.public_domain.zone_id }}"
-domain_name = "{{ .nuon.install.sandbox.outputs.nuon_dns.public_domain.name }}"
+domain_name = "*.{{ .nuon.install.sandbox.outputs.nuon_dns.public_domain.name }}"
