@@ -29,6 +29,17 @@ Set the environment variable <code>export NUON_DEBUG=true</code> then use the CL
 </details>
 
 <details>
+<summary>Dashboard UI</summary>
+
+<details>
+<summary>I started an install, but it's waiting for me to do something.</summary>
+Remember that the install runner is a VM that is created in your cloud account. You need to click on the link in the Nuon dashboard to open the CloudFormation stack or equivalent IaC in your cloud account. This will create the VM and start the install runner service. Once that is done, the install will continue automatically.
+
+</details>
+
+</details>
+
+<details>
 <summary>AWS</summary>
 
 <details>
