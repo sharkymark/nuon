@@ -11,9 +11,10 @@ Coder is a Cloud Development Environment (CDE) platform that enables developers 
 ## Coder architecture
 Coder consists of a PostgreSQL database, an API server, a web dashboard, and a Terraform provsioner server that runs `terraform plan`, `terraform apply`, and `terraform destroy` commands to build development development environments on any cloud or on-premises infrastructure.  See the [Coder architecture diagram](https://coder.com/docs/admin/infrastructure/architecture) for more details.
 
-## Coder Access URL (ALB DNS Name)
-{{ if .nuon.install.sandbox.outputs.alb_dns_name }}
-`{{ .nuon.install.sandbox.outputs.alb_dns_name }}`
+## Coder Access URL
+
+{{ if .nuon.install.sandbox.outputs.nuon_dns.public_domain.name }}
+`https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}`
 {{ end }}
 
   <small>
