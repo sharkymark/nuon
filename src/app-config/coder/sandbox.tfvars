@@ -21,20 +21,6 @@ maintenance_cluster_role_rules_override = [{
   "verbs"     = ["*"]
 }]
 
-variable "min_size" {
-  type        = number
-  default     = 2
-  description = "The minimum number of nodes in the managed node group."
-}
-
-variable "max_size" {
-  type        = number
-  default     = 5
-  description = "The maximum number of nodes in the managed node group."
-}
-
-variable "desired_size" {
-  type        = number
-  default     = 3
-  description = "The desired number of nodes in the managed node group."
-}
+min_size = 2
+max_size = 5
+desired_capacity = 3
