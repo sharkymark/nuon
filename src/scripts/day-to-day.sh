@@ -19,6 +19,14 @@ INITIALIZATION_WAIT_TIME=15
 
 # --- Script Start ---
 
+# Argument parsing for wipe-db
+WIPE_DB=false
+for arg in "$@"; do
+  if [[ "$arg" == "wipe-db" ]]; then
+    WIPE_DB=true
+  fi
+done
+
 echo "Starting Nuon Daily Bootstrap Script..."
 echo "-------------------------------------"
 
@@ -49,10 +57,24 @@ echo "Step 3/5: Refreshing AWS credentials (valid for 12 hours)..."
 nuonctl scripts exec init-aws
 echo "AWS credentials refreshed successfully."
 
+# 3b. Ensure libpq (psql) is available
+echo ""
+echo "Step 3b: Ensuring 'psql' is available via Homebrew..."
+brew link --overwrite --force libpq
+echo "'libpq' linked. 'psql' should now be available."
+
 # 4. Clear local database to prevent state accumulation
 echo ""
 echo "Step 4/5: Clearing local database..."
-nuonctl scripts exec reset-dependencies
+if [ "$WIPE_DB" = true ]; then
+  # Answer 'n' to wipe the DB
+  echo "Automatically answering 'n' to wipe the DB."
+  echo n | nuonctl scripts exec reset-dependencies
+else
+  # Answer 'y' to keep the DB
+  echo "Automatically answering 'y' to keep the DB."
+  echo y | nuonctl scripts exec reset-dependencies
+fi
 echo "Local database reset successfully."
 
 # 5. Run the stack locally
