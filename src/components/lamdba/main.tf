@@ -25,7 +25,7 @@ module "lambda" {
   memory_size   = var.lambda_memory
   timeout       = var.lambda_timeout
 
-  source_path   = "${path.module}/../../lambda"
+  source_path   = "${path.module}/src/lambda"
 
   # Optionally, set environment variables
   # environment_variables = {
