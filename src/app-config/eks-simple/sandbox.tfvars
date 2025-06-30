@@ -20,3 +20,7 @@ maintenance_cluster_role_rules_override = [{
   "resources" = ["*"]
   "verbs"     = ["*"]
 }]
+
+min_size = 2
+max_size = 3
+desired_capacity = 2
