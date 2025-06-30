@@ -14,7 +14,7 @@ Coder consists of a PostgreSQL database, an API server, a web dashboard, and a T
 ## Coder Access URL
 
 {{ if .nuon.install.sandbox.outputs.nuon_dns.public_domain.name }}
-`https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}`
+`https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}`
 {{ end }}
 
   <small>
@@ -62,7 +62,7 @@ If nuon_dns is enabled. {{ if .nuon.sandbox.outputs }}
 
 | Service | URL                                                                                                                                   |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| coder  | [coder.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}](https://app.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}) |
+| coder  | [{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}](https://app.{{ .nuon.sandbox.outputs.nuon_dns.public_domain.name }}) |
 
 {{ else }} Results will be visible after the sandbox is deployed. {{ end }}
 

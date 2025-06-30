@@ -47,9 +47,9 @@ coder:
           name: coder-db-url
           key: url
     - name: CODER_ACCESS_URL
-      value: "https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+      value: "https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_WILDCARD_ACCESS_URL
-      value: "*.coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+      value: "*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_SWAGGER_ENABLE
       value: "true"
     - name: CODER_TELEMETRY_ENABLE

@@ -3,7 +3,7 @@ type           = "helm_chart"
 chart_name     = "coder"
 namespace      = "coder"
 storage_driver = "configmap"
-dependencies   = ["coder_db"]
+dependencies   = ["coder_db, application_load_balancer"]
 
 [public_repo]
 repo      = "coder/coder"
