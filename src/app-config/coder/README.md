@@ -1,6 +1,3 @@
-{{ $region := .nuon.cloud_account.aws.region }}
-
-
 <center>
   <img src="https://raw.githubusercontent.com/coder/presskit/refs/heads/main/logos/coder_logo_transparent_black.svg"/>
   <h1>Coder</h1>

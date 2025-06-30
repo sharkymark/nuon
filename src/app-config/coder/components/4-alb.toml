@@ -1,7 +1,7 @@
 name         = "application_load_balancer"
 type         = "helm_chart"
 chart_name   = "application-load-balancer"
-dependencies = [certificate, wildcard_certificate]
+dependencies = ["certificate", "wildcard_certificate"]
 
 [public_repo]
 repo      = "nuonco/components"
