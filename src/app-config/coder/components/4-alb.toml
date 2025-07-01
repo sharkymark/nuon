@@ -1,11 +1,11 @@
 name         = "application_load_balancer"
 type         = "helm_chart"
 chart_name   = "application-load-balancer"
-dependencies = ["certificate", "wildcard_certificate"]
+dependencies = ["coder"]
 
 [public_repo]
-repo      = "nuonco/components"
-directory = "aws/alb"
+repo      = "sharkymark/nuon"
+directory = "src/app-config/coder/src/components/alb"
 branch    = "main"
 
 [values]
@@ -15,4 +15,5 @@ https_port         = "443"
 service_name       = "coder"
 service_port       = "80"
 install_name       = "{{.nuon.install.id}}"
+namespace          = "coder"
 healthcheck_path   = "/livez"
