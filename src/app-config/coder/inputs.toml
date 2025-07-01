@@ -10,3 +10,30 @@ description  = "The sub domain for the Coder service"
 default      = "coder"
 display_name = "Sub Domain"
 group        = "dns"
+
+[[group]]
+name         = "compute"
+description  = "How many nodes to provision to support dev environments?"
+display_name = "Kubernetes Nodes"
+group        = "compute"
+
+[[input]]
+name         = "min_size"
+description  = "Minimum number of nodes to provision in the EKS cluster"
+default      = "2"
+display_name = "Minimum Node Count"
+group        = "compute"
+
+[[input]]
+name         = "max_size"
+description  = "Maximum number of nodes to provision in the EKS cluster"
+default      = "5"
+display_name = "Maximum Node Count"
+group        = "compute"
+
+[[input]]
+name         = "desired_capacity"
+description  = "Desired number of nodes to provision in the EKS cluster"
+default      = "2"
+display_name = "Desired Node Count"
+group        = "compute"
