@@ -4,6 +4,8 @@ auth:
   username: coder
   password: coder
   database: coder
-persistence:
-  size: 10Gi
-  storageClass: gp2
+primary:
+  enabled: true
+  persistence:
+    size: 08Gi
+    storageClass: gp2

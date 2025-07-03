@@ -1,45 +1,61 @@
-replicaCount: 1
-
-# since tls is terminated at alb
-tls:
-  secretNames: []
-
-serviceAccount:
-  workspacePerms: true
-  enableDeployments: true
-
-# letting nuon handle alb and routing to coder service and port
-ingress:
-  enabled: false
-  # if you want to use the ingress, uncomment the following lines
-  # and set the annotations as needed
-  # annotations:
-  #   kubernetes.io/ingress.class: "alb"
-  #   alb.ingress.kubernetes.io/scheme: internet-facing
-  #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-  #   alb.ingress.kubernetes.io/certificate-arn: "{{ .nuon.components.certificate.outputs.public_domain_certificate_arn }}"
-  #   alb.ingress.kubernetes.io/target-type: ip
-
-service:
-  type: ClusterIP
-  ports:
-    - name: http
-      port: 80
-      protocol: TCP
-      targetPort: 8080
-      
-  sessionAffinity: None # Already default, but good to confirm.
-  loadBalancerIP: ""
-  loadBalancerClass: ""
-  annotations: {} # No annotations needed here for ALB provisioning
-  httpNodePort: "" # Irrelevant with ClusterIP
-  httpsNodePort: "" # Irrelevant with ClusterIP    
-
-externalTrafficPolicy: Local
-
-envUseClusterAccessURL: false
-
+# https://github.com/coder/coder/blob/main/helm/coder/values.yaml
+# https://github.com/coder/coder/pkgs/container/coder
 coder:
+
+  image:
+    # coder.image.repo -- The repository of the image.
+    repo: "ghcr.io/coder/coder"
+    tag: "v2.24.1"
+
+  replicaCount: 1
+
+  # since tls is terminated at alb
+  tls:
+    secretNames: []
+
+  serviceAccount:
+    workspacePerms: true
+    enableDeployments: true
+
+  # letting nuon handle alb and routing to coder service and port
+  ingress:
+    enabled: false
+    # if you want to use the ingress, uncomment the following lines
+    # and set the annotations as needed
+    # annotations:
+    #   kubernetes.io/ingress.class: "alb"
+    #   alb.ingress.kubernetes.io/scheme: internet-facing
+    #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    #   alb.ingress.kubernetes.io/certificate-arn: "{{ .nuon.components.certificate.outputs.public_domain_certificate_arn }}"
+    #   alb.ingress.kubernetes.io/target-type: ip
+
+  service:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 8080
+        
+    sessionAffinity: None # Already default, but good to confirm.
+    loadBalancerIP: ""
+    loadBalancerClass: ""
+    annotations: {} # No annotations needed here for ALB provisioning
+    httpNodePort: "" # Irrelevant with ClusterIP
+    httpsNodePort: "" # Irrelevant with ClusterIP    
+
+  externalTrafficPolicy: Local
+
+  envUseClusterAccessURL: false
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+    requests:
+      cpu: 250m
+      memory: 512Mi
+
   env:
     - name: CODER_PG_CONNECTION_URL
       valueFrom:
@@ -47,14 +63,10 @@ coder:
           name: coder-db-url
           key: url
     - name: CODER_ACCESS_URL
-      value: "https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+      value: "https://{{.nuon.inputs.inputs.sub_domain}}.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_WILDCARD_ACCESS_URL
       value: "*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_SWAGGER_ENABLE
-      value: "true"
-    - name: CODER_TELEMETRY_ENABLE
-      value: "true"
-    - name: CODER_REDIRECT_TO_ACCESS_URL
       value: "true"
     - name: CODER_MAX_TOKEN_LIFETIME
       value: "8760h0m0s"
