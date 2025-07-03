@@ -6,8 +6,10 @@ storage_driver = "configmap"
 
 [public_repo]
 # commenting out gitnami repo for now due to size
-# repo      = "gitnami/charts"
-# directory = "gitnami/postgresql"
+# https://github.com/bitnami/charts/tree/main/bitnami/postgresql
+# that causes nuon build issues
+# repo      = "bitnami/charts"
+# directory = "bitnami/postgresql"
 repo      = "sharkymark/nuon"
 directory = "src/helm/postgresql"
 branch    = "main"
