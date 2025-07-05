@@ -65,7 +65,7 @@ For the latest changes, see [Updates](https://docs.nuon.co/updates/)
 ## Examples
 
 ### eks-simple
-This example repository [eks-simple](https://github.com/nuonco/demo/tree/main/eks-simple) creates an EKS cluster with a `whoami` application deployed on it. I've confirmed it works and it is well maintained including the new directory structure for the app config.
+This example repository contains an App Config called [eks-simple](https://github.com/nuonco/example-app-configs) creates an EKS cluster with a `whoami` application deployed on it, an Application Load Balancer and a Certificate. The App Install is accessible from https://<subdomain input>.<install id>.nuon.run
 
 ## Frequently Asked Questions
 
@@ -75,17 +75,17 @@ The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, includ
 
 - [Nuon documentation](https://docs.nuon.co/)
 - [Nuon GitHub repository](https://github.com/nuonco)
+- [Latest EKS sandbox repo](https://github.com/nuonco/aws-eks-sandbox)
+- [Latest EKS Karpenter sanbox repo](https://github.com/nuonco/aws-eks-karpenter-sandbox)
+- [example-app-configs](https://github.com/nuonco/example-app-configs)
+- [EKS teardown script](https://github.com/nuonco/aws-eks-sandbox/tree/main/scripts)
 - [BYOC Nuon app config](https://github.com/nuonco/byoc/tree/main)
-- [EKS teardown script](https://github.com/nuonco/sandboxes/blob/main/aws-eks/error-destroy.sh)
-- [Nuon Terraform Provider](https://registry.terraform.io/providers/nuonco/nuon/latest/docs)
-- [Nuon Terraform modules](https://registry.terraform.io/modules/nuonco/)
 - [Nuon Slack channel](https://join.slack.com/t/nuoncommunity/shared_invite/zt-1q323vw9z-C8ztRP~HfWjZx6AXi50VRA)
 - [Nuon components](https://github.com/nuonco/components)
 - [Nuon Runner public components and scripts](https://github.com/nuonco/runner)
-- [Latest EKS sandbox repo](https://github.com/nuonco/aws-eks-sandbox)
-- [Latest EKS Karpenter sanbox repo](https://github.com/nuonco/aws-eks-karpenter-sandbox)
-- [eks-simple repo](https://github.com/nuonco/demo/tree/main/eks-simple)
+
 
 ## Deprecated Resources
-- [Guides repos](https://github.com/nuonco/guides)
 - [Nuon sandboxes](https://github.com/nuonco/sandboxes)
+- [Nuon Terraform Provider](https://registry.terraform.io/providers/nuonco/nuon/latest/docs)
+- [Nuon Terraform modules](https://registry.terraform.io/modules/nuonco/)
