@@ -1,5 +1,8 @@
 # https://github.com/coder/coder/blob/main/helm/coder/values.yaml
 # https://github.com/coder/coder/pkgs/container/coder
+# https://coder.com/docs/reference/cli/server
+# https://github.com/coder/coder/releases/
+
 coder:
 
   image:
@@ -7,7 +10,7 @@ coder:
     repo: "ghcr.io/coder/coder"
     tag: "v2.24.1"
 
-  replicaCount: 1
+  replicaCount: {{.nuon.inputs.inputs.replicas}}
 
   # since tls is terminated at alb
   tls:
@@ -38,12 +41,13 @@ coder:
         targetPort: 8080
         
     sessionAffinity: None # Already default, but good to confirm.
-    loadBalancerIP: ""
-    loadBalancerClass: ""
-    annotations: {} # No annotations needed here for ALB provisioning
-    httpNodePort: "" # Irrelevant with ClusterIP
-    httpsNodePort: "" # Irrelevant with ClusterIP    
+    # loadBalancerIP: ""
+    # loadBalancerClass: ""
+    # annotations: {} # No annotations needed here for ALB provisioning
+    # httpNodePort: "" # Irrelevant with ClusterIP
+    # httpsNodePort: "" # Irrelevant with ClusterIP    
 
+  # Use Local to preserve the client source IP.
   externalTrafficPolicy: Local
 
   envUseClusterAccessURL: false
@@ -62,13 +66,25 @@ coder:
         secretKeyRef:
           name: coder-db-url
           key: url
-    - name: CODER_ACCESS_URL
-      value: "https://{{.nuon.inputs.inputs.sub_domain}}.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
-    - name: CODER_WILDCARD_ACCESS_URL
-      value: "*.{{.nuon.inputs.inputs.sub_domain}}.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_SWAGGER_ENABLE
       value: "true"
+    - name: CODER_PROMETHEUS_ENABLE
+      value: "true"
+    - name: CODER_PROMETHEUS_ADDRESS
+      value: "127.0.0.1:2112"
+
+    # managed by Nuon
+    - name: CODER_ACCESS_URL
+      value: "https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+    - name: CODER_WILDCARD_ACCESS_URL
+      value: "*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+    - name: CODER_PROVISIONER_DAEMONS
+      value: "{{.nuon.inputs.inputs.provisioners}}"
     - name: CODER_MAX_TOKEN_LIFETIME
-      value: "8760h0m0s"
+      value: "{{.nuon.inputs.inputs.max_token_lifetime}}"
     - name: CODER_SESSION_DURATION
-      value: "168h0m0s"
+      value: "{{.nuon.inputs.inputs.session_duration}}"
+    - name: CODER_BLOCK_DIRECT
+      value: ".nuon.inputs.inputs.block_direct}}"
+    - name: CODER_TELEMETRY_ENABLE
+      value: "{{.nuon.inputs.inputs.telemetry}}"
