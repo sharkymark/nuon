@@ -1,20 +1,18 @@
 <center>
 
-  <img src="https://github.com/coder/coder/blob/main/docs/images/logo-black.png"/>
-  <h1>Coder</h1>
+  <video autoplay loop muted playsinline width="640" height="360">
+    <source src="https://coder.together.agency/videos/logo/sections/0/content/9/value/video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</center>
 
-## Coder Access URL
 
-{{ if .nuon.install.sandbox.outputs.nuon_dns.public_domain.name }}
-`https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}`
-{{ end }}
+Coder Access URL: https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}
 
 Nuon Install Id: {{ .nuon.install.id }}
-AWS Region: {{ .nuon.install_stack.outputs.region }}
-AWS Account Id: {{ .nuon.install_stack.outputs.account.id }}
-Namespace: {{.nuon.install.sandbox.outputs.namespaces}}
 
-</center>
+AWS Region: {{ .nuon.install_stack.outputs.region }}
+
 
 ## Full State
 
