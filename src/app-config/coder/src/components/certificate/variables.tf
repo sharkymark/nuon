@@ -14,8 +14,8 @@ variable "domain_name" {
 
 variable "subject_alternative_names" {
   description = "Additional domain names for the certificate"
-  type        = list(string)
-  default     = []
+  type        = string
+  default     = ""
 }
 
 variable "zone_id" {
