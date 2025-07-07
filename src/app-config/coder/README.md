@@ -13,7 +13,7 @@ Nuon Install Id: {{ .nuon.install.id }}
 
 AWS Region: {{ .nuon.install_stack.outputs.region }}
 
-> A wildcard DNS record needs to be manually created for the Coder app to be accessible. Create a CNAME record for `*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}` that points to the ALB DNS name
+> This is a development/demo installation of Coder. Do not use in production.
 
 ## Full State
 
