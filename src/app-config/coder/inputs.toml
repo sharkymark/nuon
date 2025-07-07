@@ -2,11 +2,11 @@
 [[group]]
 name         = "coder"
 description  = "Coder Configrations"
-display_name = "Configurations for the Coder Cloud Development Environment platform"
+display_name = "Configurations for the Coder Cloud Development Environment platform https://github.com/coder/coder/releases"
 
 [[input]]
 name         = "release"
-description  = "The release of Coder to deploy. https://github.com/coder/coder/releases"
+description  = "The release of Coder to deploy."
 default      = "v2.23.2"
 display_name = "Release"
 group        = "coder"
