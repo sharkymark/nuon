@@ -17,6 +17,15 @@ metadata:
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
     alb.ingress.kubernetes.io/healthy-threshold-count: '2'
     alb.ingress.kubernetes.io/certificate-arn: {{ .Values.domain_certificate }}
+
+
+    # --- NEW ANNOTATION FOR MULTIPLE CERTIFICATES ---
+    {{- if .Values.additional_domain_certificates }}
+    alb.ingress.kubernetes.io/certificates: {{ join "," .Values.additional_domain_certificates | quote }}
+    {{- end }}
+    # -------------------------------------------------
+
+
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.domain }}
 spec:
   ingressClassName: alb
