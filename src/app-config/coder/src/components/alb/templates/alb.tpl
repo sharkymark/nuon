@@ -20,9 +20,9 @@ metadata:
 
 
     # --- NEW ANNOTATION FOR MULTIPLE CERTIFICATES ---
-    {{- if .Values.additional_domain_certificates }}
-    alb.ingress.kubernetes.io/certificates: {{ join "," .Values.additional_domain_certificates | quote }}
-    {{- end }}
+    {{- if .Values.additional_domain_certificates }}
+    alb.ingress.kubernetes.io/certificates: {{ join "," .Values.additional_domain_certificates | quote }}
+    {{- end }}
     # -------------------------------------------------
 
 
