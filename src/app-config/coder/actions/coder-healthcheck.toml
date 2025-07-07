@@ -64,7 +64,7 @@ fi
 """
 
 [steps.env_vars]
-NUON_CODER_ACCESS_URL = "https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+NUON_CODER_ACCESS_URL = "https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
 
 [[steps]]
 name    = "Check Coder pods, services, deployments and replicasets"

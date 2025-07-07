@@ -7,7 +7,7 @@
 </center>
 
 
-Coder Access URL: [https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}](https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}})
+Coder Access URL: [https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}](https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}})
 
 Nuon Install Id: {{ .nuon.install.id }}
 
