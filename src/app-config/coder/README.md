@@ -15,6 +15,8 @@ AWS Region: {{ .nuon.install_stack.outputs.region }}
 
 > This is a development/demo installation of Coder. Do not use in production.
 
+> A CNAME record must be manually created in Route 53 for wildcard subdomains to work. For example, if your domain is `{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}`, create a CNAME record for `*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}` that points to the DNS name of the load balancer created by this Nuon app config. The load balancer DNS name can be found in AWS Console.
+
 ## Full State
 
 <details>
