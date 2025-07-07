@@ -1,7 +1,7 @@
 name         = "application_load_balancer"
 type         = "helm_chart"
 chart_name   = "application-load-balancer"
-dependencies = ["coder","wildcard_base_domain_certificate", "base_domain_certificate"]
+dependencies = ["coder"]
 
 [public_repo]
 repo      = "sharkymark/nuon"
@@ -9,9 +9,8 @@ directory = "src/app-config/coder/src/components/alb"
 branch    = "main"
 
 [values]
-domain_certificate = "{{.nuon.components.base_domain_certificate.outputs.public_domain_certificate_arn}}"
+domain_certificate = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}}"
 domain             = "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
-additional_domain_certificates = "{{ join \",\" (list .nuon.components.wildcard_base_domain_certificate.outputs.public_domain_certificate_arn) }}"
 
 https_port         = "443"
 service_name       = "coder"
