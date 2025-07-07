@@ -1,8 +1,8 @@
 #:schema https://api.nuon.co/v1/general/config-schema?source=inputs
 [[group]]
 name         = "coder"
-description  = "Coder Configrations"
-display_name = "Configurations for the Coder Cloud Development Environment platform https://github.com/coder/coder/releases"
+description  = "Coder Configrations for the Coder Cloud Development Environment platform https://github.com/coder/coder/releases"
+display_name = "Coder Configurations"
 
 [[input]]
 name         = "release"
