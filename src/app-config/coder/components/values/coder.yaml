@@ -1,5 +1,6 @@
 # https://github.com/coder/coder/blob/main/helm/coder/values.yaml
 # https://github.com/coder/coder/pkgs/container/coder
+# https://coder.com/docs/admin/setup#wildcard-access-url
 # https://coder.com/docs/reference/cli/server
 # https://github.com/coder/coder/releases/   
 
@@ -66,9 +67,9 @@ coder:
           name: coder-db-url
           key: url
     - name: CODER_ACCESS_URL
-      value: "https://{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+      value: "https://coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_WILDCARD_ACCESS_URL
-      value: "*.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+      value: "*.coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     - name: CODER_SWAGGER_ENABLE
       value: "true"
     - name: CODER_MAX_TOKEN_LIFETIME

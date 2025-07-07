@@ -10,7 +10,7 @@ branch    = "main"
 
 [values]
 domain_certificate = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}}"
-domain             = "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+domain             = "coder.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
 https_port         = "443"
 service_name       = "coder"
 service_port       = "80"
