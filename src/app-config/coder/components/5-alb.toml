@@ -1,7 +1,7 @@
 name         = "application_load_balancer"
 type         = "helm_chart"
 chart_name   = "application-load-balancer"
-dependencies = ["coder"]
+dependencies = ["coder","wildcard_base_domain_certificate", "base_domain_certificate"]
 
 [public_repo]
 repo      = "sharkymark/nuon"
