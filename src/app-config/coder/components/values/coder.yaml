@@ -11,7 +11,7 @@ coder:
     repo: "ghcr.io/coder/coder"
     tag: "{{.nuon.inputs.inputs.release}}"
 
-  replicaCount: 1
+  replicaCount: "{{.nuon.inputs.inputs.replicas}}"
 
   # since tls is terminated at alb
   tls:
