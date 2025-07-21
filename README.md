@@ -2,6 +2,10 @@
 
 As I use Nuon more and more, I find myself documenting things that I learn along the way. This document serves as a collection of these FAQ, examples, and tips.
 
+## Frequently Asked Questions
+
+The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, including CLI commands, AWS integration, and more.
+
 ## What is Nuon?
 Nuon lets customers do vendor software SaaS in their cloud. But the challenge is making it secure, since the vendor has to touch the customer's cloud. Software vendors also spend precious resources reinventing the wheel to offer cloud offerings. 
 
@@ -66,10 +70,6 @@ For the latest changes, see [Updates](https://docs.nuon.co/updates/)
 
 ### eks-simple
 This example repository contains an App Config called [eks-simple](https://github.com/nuonco/example-app-configs) creates an EKS cluster with a `whoami` application deployed on it, an Application Load Balancer and a Certificate. The App Install is accessible from https://<subdomain input>.<install id>.nuon.run
-
-## Frequently Asked Questions
-
-The [FAQ](./docs/faq.md) contains answers to common questions about Nuon, including CLI commands, AWS integration, and more.
 
 ## Resources
 

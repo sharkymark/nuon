@@ -10,8 +10,8 @@ Use the <code>nuon apps create -n <your app name> --no-template</code> command t
 </details>
 
 <details>
-<summary>There are two <code>sync</code> sub-commands under <code>nuon apps</code>, what is the difference?</summary>
-<code>nuon apps sync .</code> is a more advanced sync that does some validation and knows how to construct a config from a well-known directory structure. <code>nuon apps sync-dir</code> used to do this, but will be deprecated.
+<summary>How do upload my App Config to Nuon?</summary>
+<code>nuon apps sync .</code> does some validation and knows how to construct a config from a well-known directory structure.
 
 > Note: The directory that you run `nuon apps sync` in, must be the same name as the app created in `nuon apps create -n <your app name> --no-template`.
 </details>
@@ -34,6 +34,32 @@ Set the environment variable <code>export NUON_DEBUG=true</code> then use the CL
 <details>
 <summary>I started an install, but it's waiting for me to do something.</summary>
 Remember that the install runner is a VM that is created in your cloud account. You need to click on the link in the Nuon dashboard to open the CloudFormation stack or equivalent IaC in your cloud account. This will create the VM and start the install runner service. Once that is done, the install will continue automatically.
+
+</details>
+
+<details>
+<summary>I just spun up the eks-simple example. It worked!
+How can I tear it down?</summary>
+Nuon can gracefully deprovision. You'll see a drop-down for that. It will take a while since removing node groups and an EKS cluster takes a while in AWS.
+Note, this does not remove the Runner VM, so the customer must go into their AWS CloudFormation stack and delete it to completely remove the VM and VPC.
+If some reason, you need to manually teardown, our sandbox repos have an error-destroy.sh - it's documented here.
+https://docs.nuon.co/get-started/create-your-first-app#deprovision-the-install
+
+![Dashboard drop-down to de-provision an install](images/deprovision.png)
+
+</details>
+
+</details>
+
+<details>
+<summary>Architecture</summary>
+
+<details>
+<summary>Do I have to give the Runner cross-account permissions? That's a big no in our organization.</summary>
+No, with Nuon, you do not have to give cross-account permissions.
+How it works is during a customer Install, we generate an AWS CloudFormation stack which the customer uses their AWS profile and credentials to run.
+It creates a VPC, ASG and EC2 VM instance with Docker and a container with the Nuon Runner.
+The App Config defines IAM roles and boundaries for what the Runner can or can't do in the customer's cloud account. Like Provision and De-provision have elevated permissions to create infrastructure like an EKS cluster, while the Maintenance role is reduced permissions to upgrade the app, run health checks, etc.
 
 </details>
 
