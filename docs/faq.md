@@ -26,6 +26,14 @@ The current contexts are stored in the local <code>~/.nuon</code> file along wit
 Set the environment variable <code>export NUON_DEBUG=true</code> then use the CLI commands as usual. This will enable debug logging and show more detailed error messages.
 </details>
 
+<summary>How do I delete Components?</summary>
+Components must be deleted individually. If a component is dependent on another component, it will fail to delete, but the CLI will tell you which components must be deleted first in array output. First list the Components<code>nuon components list -a <your app name></code> then delete the Component with <code>nuon components list -a <your app name></code>
+</details>
+
+<summary>How do I delete an App?</summary>
+If your App Config has Components, the App will say it is deleted but it is in a queue until the Components are individually deleted, then the App will delete. First, list your Apps with <code>nuon apps list</code> then <code>nuon apps delete -a <your app name> --confirm</code>
+</details>
+
 </details>
 
 <details>
