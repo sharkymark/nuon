@@ -39,6 +39,74 @@ If your App Config has Components, the App will say it is deleted but it is in a
 </details>
 
 <details>
+<summary>Components</summary>
+
+<details>
+<summary>How can I make Components dependent on other Components? e.g., I want a Component to be deployed before another Component</summary>
+There are two ways to do this:
+
+1. Use the <code>dependencies</code> field in the Component's App Config
+
+```toml
+name           = "coder"
+type           = "helm_chart"
+chart_name     = "coder"
+namespace      = "coder"
+storage_driver = "configmap"
+dependencies   = ["coder_db"]
+
+[public_repo]
+repo      = "coder/coder"
+directory = "helm/coder"
+branch    = "main"
+
+[[values_file]]
+contents = "./values/coder.yaml"
+```
+
+
+2. Reference the outputs of another Component in the current Component's App Config. 
+
+In this example, the application load balancer Component config is using the `public_domain_certificate_arn` output from the `certificate` Component
+
+
+```toml
+name         = "application_load_balancer"
+type         = "helm_chart"
+chart_name   = "application-load-balancer"
+dependencies = ["coder"]
+
+[public_repo]
+repo      = "sharkymark/nuon"
+directory = "src/app-config/coder/src/components/alb"
+branch    = "main"
+
+[values]
+domain_certificate = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}}"
+domain             = "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+
+https_port         = "443"
+service_name       = "coder"
+service_port       = "80"
+install_name       = "{{.nuon.install.id}}"
+namespace          = "coder"
+healthcheck_path   = "/livez"
+
+```
+
+In the Dashboard UI, you can see the dependencies in the Components list view of the App or the Install. 
+
+![Components list view](images/component-dependencies.png)
+
+In the App detail view, there is also a View dependency graph button that will show you a graph of the dependencies between Components.
+
+![Dependency graph](images/dependency-graph.png)
+
+</details>
+</details>
+
+
+<details>
 <summary>Dashboard UI</summary>
 
 <details>
