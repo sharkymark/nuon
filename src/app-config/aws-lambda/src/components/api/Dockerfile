@@ -1,8 +1,6 @@
 # https://hub.docker.com/_/golang
-FROM golang:1.21.9-alpine3.19 as build
-
-# 🚫 Remove broken iter folder from the Go source tree
-# RUN rm -rf /usr/local/go/src/iter
+#FROM golang:1.21.9-alpine3.19 as build
+FROM golang:1.24.5-alpine3.21 as build
 
 WORKDIR /app
 COPY ./ ./
