@@ -8,6 +8,6 @@ RUN go mod download
 COPY *.go ./
 RUN CGO_ENABLED=0 GOOS=linux go build -o api
 
-FROM alpine:3.19
+FROM alpine:1.24.5
 COPY --from=build /app/api /main
 ENTRYPOINT ["/main"]
