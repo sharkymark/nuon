@@ -1,5 +1,4 @@
-# https://hub.docker.com/_/golang
-FROM golang:1.21.9-alpine3.19 as build
+FROM golang:1.22.1-alpine3.19 as build
 
 WORKDIR /app
 COPY ./ ./
