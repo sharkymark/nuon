@@ -4,7 +4,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/nuonco/guides/aws-lambda-tutorial/components/api/internal/widget"
+	"github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image/internal/widget"
 )
 
 func GetItem(id, table string) (*widget.Widget, error) {
