@@ -1,4 +1,4 @@
-module github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image
+module github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/api
 
 go 1.22.1
 

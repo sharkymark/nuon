@@ -6,5 +6,5 @@ dockerfile = "Dockerfile"
 
 [public_repo]
 repo      = "sharkymark/nuon"
-directory = "src/app-config/aws-lambda/src/components/docker-image"
+directory = "src/app-config/aws-lambda/src/components/api"
 branch    = "mm/aws-lambda-app-config"
