@@ -10,8 +10,8 @@ directory = "src/app-config/aws-lambda/src/components/api-gateway"
 branch    = "mm/aws-lambda-app-config"
 
 [vars]
-name = "api"
-domain_name = "api.{{.nuon.install.sandbox.outputs.public_domain.name }}"
+name = "{{.nuon.inputs.inputs.sub_domain}}"
+domain_name = "{{.nuon.inputs.inputs.sub_domain}}.{{.nuon.install.sandbox.outputs.public_domain.name }}"
 domain_name_certificate_arn = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}} "
 lambda_function_arn = "{{.nuon.components.get_function.outputs.lambda_function_arn}}"
 zone_id = "{{.nuon.install.sandbox.outputs.public_domain.zone_id}}"
