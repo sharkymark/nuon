@@ -1,6 +1,7 @@
 #:schema https://api.nuon.co/v1/general/config-schema?source=terraform
-name   = "get_function"
+name   = "lambda_function"
 type = "terraform_module"
+dependencies = ["dynamodb_table"]
 
 [public_repo]
 repo      = "sharkymark/nuon"

@@ -2,7 +2,7 @@
 name              = "api_gateway"
 type              = "terraform_module"
 terraform_version = "1.11.3"
-dependencies = []
+dependencies = ["certificate"]
 
 [public_repo]
 repo      = "sharkymark/nuon"
@@ -13,5 +13,5 @@ branch    = "mm/aws-lambda-app-config"
 name = "{{.nuon.inputs.inputs.sub_domain}}"
 domain_name = "{{.nuon.inputs.inputs.sub_domain}}.{{.nuon.install.sandbox.outputs.public_domain.name }}"
 domain_name_certificate_arn = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}} "
-lambda_function_arn = "{{.nuon.components.get_function.outputs.lambda_function_arn}}"
+lambda_function_arn = "{{.nuon.components.lambda_function.outputs.lambda_function_arn}}"
 zone_id = "{{.nuon.install.sandbox.outputs.public_domain.zone_id}}"
