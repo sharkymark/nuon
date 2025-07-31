@@ -1,5 +1,7 @@
 FROM golang:1.22.1-alpine3.19 as build
 
+ENV GO111MODULE=on
+
 WORKDIR /app
 COPY ./ ./
 RUN go mod download
