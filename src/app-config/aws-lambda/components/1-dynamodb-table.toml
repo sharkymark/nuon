@@ -1,0 +1,12 @@
+#:schema https://api.nuon.co/v1/general/config-schema?source=terraform
+name   = "dynamodb_table"
+type = "terraform_module"
+
+[public_repo]
+repo      = "sharkymark/nuon"
+directory = "app-config/aws-lambda/src/components/dynamodb-table"
+branch    = "mm/aws-lambda-app-config"
+
+[vars]
+name = "widgets"
+hash_key = "ID"

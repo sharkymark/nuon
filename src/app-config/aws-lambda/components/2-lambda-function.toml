@@ -1,0 +1,13 @@
+#:schema https://api.nuon.co/v1/general/config-schema?source=terraform
+name   = "get_function"
+type = "terraform_module"
+
+[public_repo]
+repo      = "sharkymark/nuon"
+directory = "app-config/aws-lambda/src/components/lambda-function"
+branch    = "mm/aws-lambda-app-config"
+
+[vars]
+function_name = "widgets"
+image_uri = "{{.nuon.components.docker_image.image.repository.uri}}:{{.nuon.components.docker_image.image.tag}}"
+dynamodb_table_arn = "{{.nuon.components.dynamodb_table.dynamodb_table_arn}}"
