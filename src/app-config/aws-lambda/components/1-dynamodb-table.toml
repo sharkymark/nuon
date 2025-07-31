@@ -5,7 +5,7 @@ dependencies = ["docker_image"]
 
 [public_repo]
 repo      = "sharkymark/nuon"
-directory = "app-config/aws-lambda/src/components/dynamodb-table"
+directory = "src/app-config/aws-lambda/src/components/dynamodb-table"
 branch    = "mm/aws-lambda-app-config"
 
 [vars]

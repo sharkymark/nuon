@@ -8,9 +8,9 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/nuonco/guides/aws-lambda-tutorial/components/api/internal/dynamodb"
-	"github.com/nuonco/guides/aws-lambda-tutorial/components/api/internal/logging"
-	"github.com/nuonco/guides/aws-lambda-tutorial/components/api/internal/widget"
+	"github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image/internal/dynamodb"
+	"github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image/internal/logging"
+	"github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image/internal/widget"
 )
 
 var logger = logging.DefaultLogger
