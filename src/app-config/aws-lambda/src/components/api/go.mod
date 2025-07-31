@@ -1,6 +1,6 @@
 module github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/api
 
-go 1.24.5
+go 1.23.11
 
 require (
 	github.com/aws/aws-lambda-go v1.46.0

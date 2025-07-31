@@ -1,6 +1,6 @@
 # https://hub.docker.com/_/golang
 #FROM golang:1.21.9-alpine3.19 as build
-FROM golang:1.24.5-alpine3.21 as build
+FROM golang:1.23.11-alpine3.21 as build
 
 WORKDIR /app
 COPY ./ ./
