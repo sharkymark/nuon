@@ -1,6 +1,7 @@
 FROM golang:1.22.1-alpine3.19 as build
 
-ENV GO111MODULE=on
+# 🚫 Remove broken iter folder from the Go source tree
+RUN rm -rf /usr/local/go/src/iter
 
 WORKDIR /app
 COPY ./ ./
