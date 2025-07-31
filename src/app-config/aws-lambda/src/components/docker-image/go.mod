@@ -1,4 +1,4 @@
-module github.com/nuonco/guides/aws-lambda-tutorial/components/api
+module github.com/sharkymark/nuon/src/app-config/aws-lambda/src/components/docker-image
 
 go 1.22.1
 
