@@ -7,7 +7,6 @@ RUN go mod download
 
 COPY . .
 
-WORKDIR /app/src/components/api
 RUN CGO_ENABLED=0 GOOS=linux go build -o api
 
 FROM alpine:3.19
