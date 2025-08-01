@@ -1,21 +1,16 @@
-FROM golang:1.22.2-bookworm as build
-
-# Neutralize CI env that can force stdlib rebuilds
-ENV GOEXPERIMENT=
-ENV GOFLAGS=
-ENV GOPROXY=https://proxy.golang.org,direct
-
+# Builder: Go 1.21 (no iter logic in stdlib)
+FROM golang:1.21.13-bookworm AS build
 WORKDIR /app
 
+# This folder is a standalone module (has its own go.mod/go.sum)
 COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
+# Build THIS module
+RUN CGO_ENABLED=0 GOOS=linux go build -o /api .
 
-RUN CGO_ENABLED=0 GOOS=linux go env && CGO_ENABLED=0 GOOS=linux go build -o /api .
-
-
+# Minimal runtime
 FROM alpine:3.19
-COPY --from=build /app/api /main
-RUN chmod +x /main
+COPY --from=build /api /main
 ENTRYPOINT ["/main"]
