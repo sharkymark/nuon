@@ -1,12 +1,16 @@
 FROM golang:1.22.2-bookworm as build
 
 WORKDIR /app
-COPY ./ ./
 
+COPY go.mod go.sum ./
 RUN go mod download
-COPY *.go ./
+
+COPY . .
+
+WORKDIR /app/src/components/api
 RUN CGO_ENABLED=0 GOOS=linux go build -o api
 
 FROM alpine:3.19
 COPY --from=build /app/api /main
+RUN chmod +x /main
 ENTRYPOINT ["/main"]
