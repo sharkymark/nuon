@@ -1,30 +1,42 @@
-# Builder: start from plain Debian, install Go manually
+# Builder: clean Debian, install a pristine Go toolchain to /opt/go
 FROM debian:bookworm-slim AS build
+
+ARG GO_VERSION=1.21.13
+ARG GO_TARBALL=go${GO_VERSION}.linux-amd64.tar.gz
+ARG GO_SHA256=61a5b0d62f19b0c2759f1a46998c7a5d8a2d4b3fc9e2f2b8bfa523c3f2d2aeb9  # update if needed
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
-      ca-certificates curl git && \
+      ca-certificates curl git xz-utils coreutils && \
     rm -rf /var/lib/apt/lists/*
 
-# Install a clean Go toolchain (no iter baggage)
-ENV GO_VERSION=1.21.13
-RUN curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \
-    | tar -C /usr/local -xz
-ENV GOROOT=/usr/local/go
-ENV PATH=$GOROOT/bin:$PATH
+# Download & verify official Go
+WORKDIR /tmp
+RUN curl -fsSLO https://go.dev/dl/${GO_TARBALL} \
+ && echo "${GO_SHA256}  ${GO_TARBALL}" | sha256sum -c -
 
+# Install Go into /opt/go (NOT /usr/local/go to avoid any overlays)
+RUN mkdir -p /opt \
+ && tar -C /opt -xzf ${GO_TARBALL} \
+ && mv /opt/go /opt/go${GO_VERSION}
+
+# Configure Go environment
+ENV GOROOT=/opt/go${GO_VERSION}
+ENV GOPATH=/go
+ENV PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+ENV GOTOOLCHAIN=local
+ENV GOEXPERIMENT=
+ENV GOFLAGS=
+ENV GOPROXY=https://proxy.golang.org,direct
+ENV GOMODCACHE=/go/pkg/mod
+
+# Defensive: remove any stray iter sources if present in this toolchain
+RUN rm -rf ${GOROOT}/src/iter || true \
+ && rm -f ${GOROOT}/src/bytes/iter.go || true
+
+# Build your module (context is the api/ folder)
 WORKDIR /app
-# This folder is its own module
 COPY go.mod go.sum ./
 RUN go mod download
-
 COPY . .
-# (Optional) prove no stray iter in this toolchain
-RUN test ! -d /usr/local/go/src/iter || (echo "iter exists in GOROOT" && exit 1)
 
-# Build this module
-RUN CGO_ENABLED=0 GOOS=linux go version && \
-    CGO_ENABLED=0 GOOS=linux go build -o /api .
-
-# Minimal runtime
-FROM alpine:3.19
-COPY --from=build /api /main
-ENTRYPOINT ["/main"]
+# Prove the toolchain & a
