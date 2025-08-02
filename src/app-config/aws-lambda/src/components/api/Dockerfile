@@ -5,7 +5,7 @@ ARG GO_VERSION=1.21.13
 ARG GO_TARBALL=go${GO_VERSION}.linux-amd64.tar.gz
 ARG GO_SHA256=502fc16d5910562461e6a6631fb6377de2322aad7304bf2bcd23500ba9dab4a7
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
       ca-certificates curl git xz-utils && \
     rm -rf /var/lib/apt/lists/*
 
