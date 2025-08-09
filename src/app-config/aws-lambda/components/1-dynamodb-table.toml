@@ -8,6 +8,5 @@ repo      = "sharkymark/nuon"
 directory = "src/app-config/aws-lambda/src/components/dynamodb-table"
 branch    = "mm/aws-lambda-app-config"
 
-[vars]
-name = "widgets"
-hash_key = "ID"
+[[var_file]]
+contents = "./1-dynamodb-table.tfvars"
