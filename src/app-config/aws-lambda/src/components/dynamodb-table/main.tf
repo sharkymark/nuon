@@ -8,7 +8,7 @@ module "dynamodb_table" {
   attributes = [
     {
       name = "ID"
-      type = "N"
+      type = "S"
     },
   ]
 }
