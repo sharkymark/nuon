@@ -4,7 +4,7 @@ provider "aws" {
   default_tags {
     tags = {
       "install.nuon.co/id"     = var.install_id
-      "component.nuon.co/name" = "dynamodb_table"
+      "component.nuon.co/name" = "api_gateway"
     }
   }
 }

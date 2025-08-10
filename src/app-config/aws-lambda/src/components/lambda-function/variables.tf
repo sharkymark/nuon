@@ -5,3 +5,11 @@ variable "function_name" {
 variable "image_uri" {
   type = string
 }
+
+variable "region" {
+  type = string
+}
+
+variable "install_id" {
+  type = string
+}

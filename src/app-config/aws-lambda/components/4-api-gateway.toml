@@ -2,7 +2,6 @@
 name              = "api_gateway"
 type              = "terraform_module"
 terraform_version = "1.11.3"
-dependencies = ["certificate"]
 
 [public_repo]
 repo      = "sharkymark/nuon"

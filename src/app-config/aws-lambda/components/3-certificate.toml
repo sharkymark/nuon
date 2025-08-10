@@ -2,7 +2,6 @@
 name              = "certificate"
 type              = "terraform_module"
 terraform_version = "1.11.3"
-dependencies = ["lambda_function"]
 
 [public_repo]
 repo      = "sharkymark/nuon"

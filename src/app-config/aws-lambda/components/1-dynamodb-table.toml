@@ -1,13 +1,14 @@
 #:schema https://api.nuon.co/v1/general/config-schema?source=terraform
 name   = "dynamodb_table"
 type = "terraform_module"
-dependencies = ["docker_image"]
 
 [public_repo]
-repo      = "sharkymark/nuon"
-directory = "src/app-config/aws-lambda/src/components/dynamodb-table"
-branch    = "mm/aws-lambda-app-config"
+repo        = "sharkymark/nuon"
+directory   = "src/app-config/aws-lambda/src/components/dynamodb-table"
+branch      = "mm/aws-lambda-app-config"
 
-[var]
-name = "widgets"
-hash_key = "ID"
+[vars]
+name        = "widgets"
+hash_key    = "ID"
+install_id  = "{{.nuon.install.id}}"
+region      = "{{.nuon.install_stack.outputs.region}}"
