@@ -18,6 +18,9 @@ if [ -z "$TARGET_APP_NAME" ]; then
   exit 1
 fi
 
+# Wait time (in seconds) after deleting a component before verifying deletion
+COMPONENT_DELETE_WAIT_SECONDS=20 # Change this value to adjust the wait time
+
 ## Function to delete components and optionally the app
 delete_app_and_components() {
   # Trim initial input app name
@@ -32,7 +35,6 @@ delete_app_and_components() {
 
   # --- Retrieve App ID (still needed for install check and final app delete) ---
   echo "Retrieving App ID for '$APP_NAME_TO_DELETE' (needed for install check and final app delete)..."
-  echo "COMMAND: nuon apps list --json | jq -r \".[] | select(.name == \\\"$APP_NAME_TO_DELETE\\\") | .id\""
   APP_ID=$(nuon apps list --json | jq -r ".[] | select(.name == \"$APP_NAME_TO_DELETE\") | .id")
 
   if [ -z "$APP_ID" ]; then
@@ -44,7 +46,6 @@ delete_app_and_components() {
 
   ## Check for existing installs
   echo "Checking for existing installs for app: $APP_ID ($APP_NAME_TO_DELETE)..."
-  echo "COMMAND: nuon installs list --json | jq -r \".[] | select(.app_id == \\\"$APP_ID\\\")\" | wc -l"
   INSTALL_COUNT=$(nuon installs list --json | jq -r ".[] | select(.app_id == \"$APP_ID\")" | wc -l)
 
   if [ "$INSTALL_COUNT" -gt 0 ]; then
@@ -59,52 +60,68 @@ delete_app_and_components() {
   echo "----------------------------------------------------"
 
   ## Get and delete components
-  echo "Listing components for app: $APP_NAME_TO_DELETE..."
-  echo "COMMAND: nuon components list -a \"$APP_NAME_TO_DELETE\" --json"
-  # Use JSON output for robust parsing of Component ID and Name
-  COMPONENT_LIST_JSON=$(nuon components list -a "$APP_NAME_TO_DELETE" --json)
-
-  if [ -z "$COMPONENT_LIST_JSON" ] || [ "$(echo "$COMPONENT_LIST_JSON" | jq 'length')" -eq 0 ]; then
-    echo "No components found for app '$APP_NAME_TO_DELETE'."
-  else
-    echo "Found components. Attempting to delete them one by one..."
-
-    # Use a string to collect overall status from the loop, to propagate to outer scope
-    local temp_deletion_status="SUCCESS"
-
-    # Iterate through JSON output to get ID and Name cleanly using `while read` with process substitution
-    # This keeps variable scope local to the function, but changes to `temp_deletion_status` are visible.
-    while IFS= read -r component_json; do
-        local COMPONENT_ID=$(echo "$component_json" | jq -r '.id' | xargs) # Trim ID
-        local COMPONENT_NAME=$(echo "$component_json" | jq -r '.name' | xargs) # Trim Name
-
-        echo "---"
-        echo "Processing component: Name='$COMPONENT_NAME', ID='$COMPONENT_ID'"
-        echo "Attempting to delete component: $COMPONENT_ID for app '$APP_NAME_TO_DELETE'..."
-        echo "COMMAND: nuon components delete -a \"$APP_NAME_TO_DELETE\" -c \"$COMPONENT_ID\""
-        nuon components delete -a "$APP_NAME_TO_DELETE" -c "$COMPONENT_ID" 2>&1
-
-        # --- Verification Step ---
-        # Check if the component still exists after the deletion attempt
-        sleep 2 # Adjust this delay if needed
-        echo "VERIFYING: nuon components list -a \"$APP_NAME_TO_DELETE\" --json | jq -r \".[] | select(.id == \\\"$COMPONENT_ID\\\")\" | wc -l"
-        VERIFY_COUNT=$(nuon components list -a "$APP_NAME_TO_DELETE" --json | jq -r ".[] | select(.id == \"$COMPONENT_ID\")" | wc -l)
-
-        # INVERTED LOGIC FIX:
-        if [ "$VERIFY_COUNT" -eq 0 ]; then # If count is 0, component is NOT found, which means SUCCESS
-          echo "✅ SUCCESS: Component $COMPONENT_ID is no longer listed, confirming deletion."
-        else # If count is > 0, component IS still found, which means FAILURE
-          echo "❌ ERROR: Component $COMPONENT_ID FAILED to delete (still present after attempt)."
-          temp_deletion_status="FAILURE" # Mark as failure
-        fi
-      done < <(echo "$COMPONENT_LIST_JSON" | jq -c '.[]') # Input to while loop via process substitution
-
-    if [ "$temp_deletion_status" == "FAILURE" ]; then
-      components_failed_to_delete=true # Propagate overall failure to outer scope
+  while true; do
+    echo "Listing components for app: $APP_NAME_TO_DELETE..."
+    COMPONENT_LIST_JSON=$(nuon components list -a "$APP_NAME_TO_DELETE" --json)
+    COMPONENT_COUNT=$(echo "$COMPONENT_LIST_JSON" | jq 'length')
+    if [ -z "$COMPONENT_LIST_JSON" ] || [ "$COMPONENT_COUNT" -eq 0 ]; then
+      echo "No components found for app '$APP_NAME_TO_DELETE'."
+      break
     fi
-
-    echo "All component deletion attempts for app '$APP_NAME_TO_DELETE' completed."
-  fi # End of if components found
+    echo "Found components for app '$APP_NAME_TO_DELETE':"
+    for ((i=0; i<COMPONENT_COUNT; i++)); do
+      NAME=$(echo "$COMPONENT_LIST_JSON" | jq -r ".[$i].name")
+      ID=$(echo "$COMPONENT_LIST_JSON" | jq -r ".[$i].id")
+      echo "  [$((i+1))] Name: $NAME | ID: $ID"
+    done
+    echo
+    read -p "Enter the numbers of the components you want to delete (comma-separated, or 'all' to delete all, or press Enter to skip): " COMPONENT_SELECTION
+    if [[ -z "$COMPONENT_SELECTION" ]]; then
+      echo "No components selected. Skipping deletion for app '$APP_NAME_TO_DELETE'."
+      break
+    fi
+    if [[ "$COMPONENT_SELECTION" =~ ^[Aa][Ll][Ll]$ ]]; then
+      SELECTED_INDICES=$(seq 1 $COMPONENT_COUNT)
+    else
+      SELECTED_INDICES=$(echo "$COMPONENT_SELECTION" | tr ',' ' ')
+    fi
+    echo "You selected: $SELECTED_INDICES"
+    read -p "Are you sure you want to delete these components? (y/N): " CONFIRM_DELETE
+    if [[ ! "$CONFIRM_DELETE" =~ ^[Yy]$ ]]; then
+      echo "Skipping deletion for app '$APP_NAME_TO_DELETE' as per user request."
+      break
+    fi
+    local temp_deletion_status="SUCCESS"
+    for idx in $SELECTED_INDICES; do
+      i=$((idx-1))
+      COMPONENT_ID=$(echo "$COMPONENT_LIST_JSON" | jq -r ".[$i].id" | xargs)
+      COMPONENT_NAME=$(echo "$COMPONENT_LIST_JSON" | jq -r ".[$i].name" | xargs)
+      echo "---"
+      echo "Processing component: Name='$COMPONENT_NAME', ID='$COMPONENT_ID'"
+      echo "Attempting to delete component: $COMPONENT_ID for app '$APP_NAME_TO_DELETE'..."
+      DELETE_OUTPUT=$(nuon components delete -a "$APP_NAME_TO_DELETE" -c "$COMPONENT_ID" 2>&1)
+      echo "$DELETE_OUTPUT"
+      # Check for dependency error
+      if echo "$DELETE_OUTPUT" | grep -q "components dependents exist"; then
+        DEPENDENT_IDS=$(echo "$DELETE_OUTPUT" | grep -oE 'Dependent IDs: \[[^]]*\]' | sed 's/Dependent IDs: \[//;s/\]//')
+        echo "❌ ERROR: Component $COMPONENT_ID could not be deleted due to dependencies. Dependent IDs: [$DEPENDENT_IDS]"
+        temp_deletion_status="FAILURE"
+        continue
+      fi
+      sleep $COMPONENT_DELETE_WAIT_SECONDS
+      VERIFY_COUNT=$(nuon components list -a "$APP_NAME_TO_DELETE" --json | jq -r ".[] | select(.id == \"$COMPONENT_ID\")" | wc -l)
+      if [ "$VERIFY_COUNT" -eq 0 ]; then
+        echo "✅ SUCCESS: Component $COMPONENT_ID is no longer listed, confirming deletion."
+      else
+        echo "❌ ERROR: Component $COMPONENT_ID FAILED to delete (still present after attempt)."
+        temp_deletion_status="FAILURE"
+      fi
+    done
+    if [ "$temp_deletion_status" == "FAILURE" ]; then
+      components_failed_to_delete=true
+    fi
+    echo "Component deletion round completed."
+  done
 
   echo "----------------------------------------------------"
 
@@ -115,7 +132,6 @@ delete_app_and_components() {
   else
     echo "All components successfully deleted or no components found. Proceeding with app deletion."
     echo "Deleting app: $APP_NAME_TO_DELETE (ID: $APP_ID)..."
-    echo "COMMAND: nuon apps delete -a \"$APP_ID\" --confirm"
     DELETE_APP_OUTPUT=$(nuon apps delete -a "$APP_ID" --confirm 2>&1)
     echo "$DELETE_APP_OUTPUT" # Print the full output from Nuon CLI
 
@@ -153,4 +169,4 @@ else
 fi
 
 echo "----------------------------------------------------"
-echo "Script finished."cd eks
+echo "Script finished."
