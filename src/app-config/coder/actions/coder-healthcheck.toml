@@ -7,10 +7,6 @@ name    = "check_coder_deployment"
 timeout = "5m"
 
 [[triggers]]
-type           = "post-deploy-component"
-component_name = "application_load_balancer"
-
-[[triggers]]
 type = "manual"
 
 [[steps]]
