@@ -1,15 +1,25 @@
 #!/usr/bin/env sh
 
-# Assuming NUON_CODER_ACCESS_URL is provided by Nuon's environment
-# or retrieved from a Nuon-specific output.
-# Example: NUON_CODER_ACCESS_URL="https://your-subdomain.your-domain.nuon.run"
+# Parse --url= argument if provided
+for arg in "$@"; do
+  case $arg in
+    --url=*)
+      BASE_URL="${arg#--url=}"
+      ;;
+  esac
+done
 
-if [ -z "$NUON_CODER_ACCESS_URL" ]; then
-  echo "Error: Coder external access URL not found."
+# If BASE_URL not set by --url=, fall back to environment variable
+if [ -z "$BASE_URL" ]; then
+  BASE_URL="$NUON_CODER_ACCESS_URL"
+fi
+
+if [ -z "$BASE_URL" ]; then
+  echo "Error: Coder external access URL not found. Pass as --url= or set NUON_CODER_ACCESS_URL."
   exit 1
 fi
 
-HEALTH_CHECK_URL="${NUON_CODER_ACCESS_URL}/livez"
+HEALTH_CHECK_URL="${BASE_URL}/livez"
 
 echo "Checking Coder health at: $HEALTH_CHECK_URL"
 
