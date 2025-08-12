@@ -11,12 +11,13 @@ set -o pipefail # Crucial: ensures pipe failures are caught
 
 TARGET_APP_NAME="$1"
 
-# Check if an argument was provided
-if [ -z "$TARGET_APP_NAME" ]; then
-  echo "Error: Please provide the Nuon app name or '*' as an argument."
-  echo "Usage: $0 <app_name> | *"
-  exit 1
-fi
+# Print current org info at the top
+CURRENT_ORG_ID=$(nuon orgs current --json | jq -r '.id')
+echo "Current Org ID: $CURRENT_ORG_ID"
+echo "----------------------------------------------------"
+echo "Available Orgs (the selected one is marked with *):"
+nuon orgs list --json | jq -r --arg CURRENT_ORG_ID "$CURRENT_ORG_ID" 'map("[" + (if .id == $CURRENT_ORG_ID then "*" else " " end) + "] " + .name + " (ID: " + .id + ")") | .[]'
+echo "----------------------------------------------------"
 
 # Wait time (in seconds) after deleting a component before verifying deletion
 COMPONENT_DELETE_WAIT_SECONDS=20 # Change this value to adjust the wait time
@@ -145,6 +146,70 @@ delete_app_and_components() {
     fi
   fi
 }
+
+# Check if an argument was provided
+if [ -z "$TARGET_APP_NAME" ]; then
+  # No argument: list all apps and prompt user to select one
+  APP_LIST_JSON=$(nuon apps list --json)
+  APP_COUNT=$(echo "$APP_LIST_JSON" | jq 'length')
+  if [ -z "$APP_LIST_JSON" ] || [ "$APP_COUNT" -eq 0 ]; then
+    echo "No Nuon apps found. Exiting."
+    exit 0
+  fi
+  while true; do
+    echo "Available Nuon apps:"
+    for ((i=0; i<APP_COUNT; i++)); do
+      APP_NAME=$(echo "$APP_LIST_JSON" | jq -r ".[$i].name")
+      APP_ID=$(echo "$APP_LIST_JSON" | jq -r ".[$i].id")
+      echo "  [$((i+1))] $APP_NAME (ID: $APP_ID)"
+    done
+    echo "  [all] Delete ALL Nuon apps"
+    echo
+    read -p "Enter the number of the app you want to delete, 'all' to delete all, or press Enter to exit: " APP_SELECTION
+    if [[ -z "$APP_SELECTION" ]]; then
+      echo "No app selected. Exiting."
+      exit 0
+    fi
+    if [[ "$APP_SELECTION" =~ ^[Aa][Ll][Ll]$ ]]; then
+      # User chose to delete all apps
+      echo "You chose to delete ALL Nuon apps."
+      echo "----------------------------------------------------"
+      echo "Attempting to delete ALL Nuon apps and their components (if no installs present)."
+      echo "--------------------------------------------------------------------------------"
+      APP_LIST_JSON=$(nuon apps list --json)
+      if [ -z "$APP_LIST_JSON" ] || [ "$(echo "$APP_LIST_JSON" | jq 'length')" -eq 0 ]; then
+        echo "No Nuon apps found to delete."
+      else
+        APP_NAMES=$(echo "$APP_LIST_JSON" | jq -r '.[].name' | xargs -n1)
+        for APP_NAME_ITER in $APP_NAMES; do
+          delete_app_and_components "$APP_NAME_ITER"
+        done
+      fi
+      # Refresh app list after deletion
+      APP_LIST_JSON=$(nuon apps list --json)
+      APP_COUNT=$(echo "$APP_LIST_JSON" | jq 'length')
+      if [ "$APP_COUNT" -eq 0 ]; then
+        echo "No Nuon apps remaining. Exiting."
+        exit 0
+      fi
+      continue
+    fi
+    if ! [[ "$APP_SELECTION" =~ ^[0-9]+$ ]] || [ "$APP_SELECTION" -lt 1 ] || [ "$APP_SELECTION" -gt "$APP_COUNT" ]; then
+      echo "Invalid selection. Please enter a valid number or 'all'."
+      continue
+    fi
+    SELECTED_INDEX=$((APP_SELECTION-1))
+    TARGET_APP_NAME=$(echo "$APP_LIST_JSON" | jq -r ".[$SELECTED_INDEX].name")
+    delete_app_and_components "$TARGET_APP_NAME"
+    # Refresh app list after deletion
+    APP_LIST_JSON=$(nuon apps list --json)
+    APP_COUNT=$(echo "$APP_LIST_JSON" | jq 'length')
+    if [ "$APP_COUNT" -eq 0 ]; then
+      echo "No Nuon apps remaining. Exiting."
+      exit 0
+    fi
+  done
+fi
 
 # Main logic based on the argument
 if [ "$TARGET_APP_NAME" == "*" ]; then
