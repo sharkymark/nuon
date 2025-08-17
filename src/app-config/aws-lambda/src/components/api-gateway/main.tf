@@ -8,6 +8,7 @@ module "api_gateway" {
   domain_name                 = "${var.name}.${var.domain_name}"
   domain_name_certificate_arn = var.domain_name_certificate_arn
   protocol_type               = "HTTP"
+  create_certificate          = false
 
   stage_access_log_settings = {
     create_log_group = true
