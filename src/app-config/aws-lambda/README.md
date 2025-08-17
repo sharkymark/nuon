@@ -44,3 +44,9 @@ curl https://{{.nuon.components.api_gateway.outputs.api_gateway.domain_name_id}}
 ## Resources
 
 [What is AWS Lambda?](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
+
+[API Gateway Terraform Module](https://registry.terraform.io/modules/terraform-aws-modules/apigateway-v2/aws/latest)
+
+[DynamoDB Terraform Module](https://registry.terraform.io/modules/terraform-aws-modules/dynamodb-table/aws/latest)
+
+[Lambda Terraform Module](https://registry.terraform.io/modules/terraform-aws-modules/lambda/aws/latest)
