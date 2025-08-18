@@ -1,5 +1,5 @@
 locals {
-  fqdn = "${var.name}.${var.domain_name}"
+  fqdn = var.domain_name
 }
 
 variable "region" {
@@ -22,7 +22,7 @@ variable "lambda_function_arn" {
 
 variable "domain_name" {
   type        = string
-  description = "the root domain name"
+  description = "the domain name"
 }
 
 

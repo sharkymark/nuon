@@ -5,7 +5,7 @@ module "api_gateway" {
 
   name                        = var.name
   hosted_zone_name            = var.domain_name
-  domain_name                 = "${var.name}.${var.domain_name}"
+  domain_name                 = var.domain_name
   domain_name_certificate_arn = var.domain_name_certificate_arn
   protocol_type               = "HTTP"
   create_certificate          = false
