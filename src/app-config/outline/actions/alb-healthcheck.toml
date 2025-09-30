@@ -10,8 +10,11 @@ name    = "alb-healthcheck"
 command = "./healthcheck.sh"
 
 [steps.public_repo]
+#repo      = "nuonco/example-app-configs"
+#directory = "outline/src/actions/alb"
+#branch    = "main"
 repo      = "sharkymark/nuon"
-directory = "src/app-configs/outline/src/actions/alb"
+directory = "src/app-config/outline/src/actions/alb"
 branch    = "mm/outline"
 
 [steps.env_vars]

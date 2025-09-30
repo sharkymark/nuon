@@ -9,7 +9,7 @@ dependencies = ["outline"]
 #directory = "outline/src/components/alb"
 #branch    = "main"
 repo      = "sharkymark/nuon"
-directory = "src/app-configs/outline/src/components/alb"
+directory = "src/app-config/outline/src/components/alb"
 branch    = "mm/outline"
 
 [values]

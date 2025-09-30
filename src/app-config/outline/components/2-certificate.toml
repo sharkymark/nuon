@@ -8,7 +8,7 @@ terraform_version = "1.11.3"
 #directory = "outline/src/components/certificate"
 #branch    = "main"
 repo      = "sharkymark/nuon"
-directory = "src/app-configs/outline/src/components/certificate"
+directory = "src/app-config/outline/src/components/certificate"
 branch    = "mm/outline"
 
 [vars]

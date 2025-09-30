@@ -10,7 +10,7 @@ storage_driver = "configmap"
 #directory = "outline/src/components/outline-helm-chart"
 #branch    = "main"
 repo      = "sharkymark/nuon"
-directory = "src/app-configs/outline/src/components/outline-helm-chart"
+directory = "src/app-config/outline/src/components/outline-helm-chart"
 branch    = "mm/outline"
 
 [[values_file]]

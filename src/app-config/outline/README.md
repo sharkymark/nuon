@@ -11,7 +11,7 @@ Nuon Install Id: {{ .nuon.install.id }}
 
 AWS Region: {{ .nuon.install_stack.outputs.region }}
 
-## What is Twenty?
+## What is Outline?
 
 [Outline](https://www.getoutline.com/) is a modern knowledge base and wiki for teams and a self-hosted alternative to SaaS-based Notion. It helps you share information, collaborate on documents, and keep your team aligned.
 
