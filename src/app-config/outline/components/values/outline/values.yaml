@@ -54,8 +54,8 @@ minio:
     tag: latest
   disableWebUI: false
   ingress:
-    enabled: true
-    hostname: "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+    enabled: false
+    hostname: "data.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
     tls: true
   mode: "standalone"
   defaultBuckets: "ol-data"
@@ -64,8 +64,6 @@ minio:
   accessKey:
     password: "zFPVNNK*QNp3^V4J38Gy76SehG"
   extraEnvVars:
-    - name: MINIO_API_CORS_ALLOW_ORIGIN
-      value: "*"
   persistence:
     enabled: true
     size: 2Gi

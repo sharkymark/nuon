@@ -1,0 +1,21 @@
+#:schema https://api.nuon.co/v1/general/config-schema?type=helm
+name         = "application_load_balancer_minio"
+type         = "helm_chart"
+chart_name   = "application-load-balancer"
+dependencies = ["outline"]
+
+[public_repo]
+repo      = "sharkymark/nuon"
+directory = "src/app-config/outline/src/components/alb"
+branch    = "mm/outline"
+
+[values]
+domain_certificate = "{{.nuon.components.certificate.outputs.public_domain_certificate_arn}}"
+domain             = "data.{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+
+https_port         = "443"
+service_name       = "outline-minio"
+service_port       = "9000"
+install_name       = "{{.nuon.install.id}}"
+namespace          = "outline"
+healthcheck_path   = "/minio/health/live"
