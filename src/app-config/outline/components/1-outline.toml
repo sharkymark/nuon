@@ -1,0 +1,17 @@
+#:schema https://api.nuon.co/v1/general/config-schema?type=helm
+name           = "outline"
+type           = "helm_chart"
+chart_name     = "outline"
+namespace      = "outline"
+storage_driver = "configmap"
+
+[public_repo]
+#repo      = "nuonco/example-app-configs"
+#directory = "outline/src/components/outline-helm-chart"
+#branch    = "main"
+repo      = "sharkymark/nuon"
+directory = "src/app-configs/outline/src/components/outline-helm-chart"
+branch    = "mm/outline"
+
+[[values_file]]
+contents = "./values/outline/values.yaml"

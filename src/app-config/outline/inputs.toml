@@ -1,0 +1,53 @@
+#:schema https://api.nuon.co/v1/general/config-schema?source=inputs
+[[group]]
+name         = "app"
+description  = "App-specific configurations"
+display_name = "App Configurations"
+
+[[input]]
+name         = "release"
+description  = "The release of Outline to deploy."
+default      = "0.87.4"
+display_name = "Release"
+group        = "app"
+
+[[input]]
+name         = "replicas"
+description  = "The number of replicas of the control plane pods to deploy"
+default      = "1"
+display_name = "Replicas"
+group        = "app"
+
+[[group]]
+name         = "compute"
+description  = "How many nodes to provision to support dev environments? https://aws.amazon.com/ec2/instance-types/ e.g., t3-large, t3.xlarge, t3.2xlarge"
+display_name = "Kubernetes Nodes"
+group        = "compute"
+
+[[input]]
+name         = "instance_type"
+description  = "The AWS instance type t3a.large, t3a.xlarge, t3a.2xlarge"
+default      = "t3a.medium"
+display_name = "Node Instance Size"
+group        = "compute"
+
+[[input]]
+name         = "min_size"
+description  = "Minimum number of nodes to provision in the EKS cluster"
+default      = "2"
+display_name = "Minimum Node Count"
+group        = "compute"
+
+[[input]]
+name         = "max_size"
+description  = "Maximum number of nodes to provision in the EKS cluster"
+default      = "5"
+display_name = "Maximum Node Count"
+group        = "compute"
+
+[[input]]
+name         = "desired_size"
+description  = "Desired number of nodes to provision in the EKS cluster"
+default      = "2"
+display_name = "Desired Node Count"
+group        = "compute"

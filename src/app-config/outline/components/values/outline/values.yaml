@@ -1,0 +1,71 @@
+# https://hub.docker.com/r/outlinewiki/outline/tags
+
+name: outline
+
+image:
+  repository: outlinewiki/outline
+  tag: "{{.nuon.inputs.inputs.release}}"
+  pullPolicy: IfNotPresent
+
+replicas: 1
+
+# Generate secure keys with: openssl rand -hex 32
+secretKey: "5974e36f82085f057223565ac2d0d01427a90248ade611108b4b937672649bd4"
+utilsSecret: "8c5a14973325ba56694a99856e6be330812b875e5f683dd37022cf76444774bb"
+
+ingress:
+  enabled: false
+  tls:
+    enabled: true
+  host: "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+
+redis:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/redis
+    tag: latest
+  architecture: "standalone"
+  auth:
+    enabled: false
+  persistence:
+    size: 2Gi
+
+postgresql:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/postgresql
+    tag: latest
+  architecture: "standalone"
+  postgresqlDatabase: "outline"
+  postgresqlUsername: "outline"
+  postgresqlPassword: "vh4rf^q32BcvtFqFVjny4pnM"
+  postgresqlPostgresPassword: "Ma#wXFMz6jFqXUr^qP&K66XQbd"
+  persistence:
+    enabled: true
+    size: 1Gi
+
+minio:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/minio
+    tag: latest
+  disableWebUI: false
+  ingress:
+    enabled: true
+    hostname: "{{.nuon.install.sandbox.outputs.nuon_dns.public_domain.name}}"
+    tls: true
+  mode: "standalone"
+  defaultBuckets: "ol-data"
+  secretKey:
+    password: "Uk4LuwVFvRDiG6k4nYA5C^835V"
+  accessKey:
+    password: "zFPVNNK*QNp3^V4J38Gy76SehG"
+  extraEnvVars:
+    - name: MINIO_API_CORS_ALLOW_ORIGIN
+      value: "*"
+  persistence:
+    enabled: true
+    size: 2Gi
